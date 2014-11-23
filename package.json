@@ -1,0 +1,27 @@
+{
+  "name": "ColourLovers API Heroku HTTPS Proxy",
+  "version": "0.1.2",
+  "description": "A simple Node.js proxy for ColourLovers API to be used through HTTPS",
+  "author": "Dmitry Sadakov <sadakov@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "~4.9.x",
+    "request": "^2.48.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cdima/colourlovers"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}
