@@ -1,4 +1,4 @@
-# ColouLovers.com API Proxy built on Node.JS and Deployed on heroku
+# ColourLovers.com API Proxy built on Node.JS and Deployed on heroku
 
 Unfortunatelly colourlovers does not provide secured https access to their api; 
 This proxy, if deployed on a https server, would forward any request to /api to http://colourlovers.com/api. It is deployed on a single dyno [heroku](https://colorlovers.herokuapp.com);
