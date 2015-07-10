@@ -1,25 +1,28 @@
-console.log("starting server")
-var express = require('express')
-var app = express();
 var http = require('http');
-
 var request = require('request');
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+function handleError(err) {
+  console.error("Caught exception:", err, err.stack);
+  this.end();
+  this.emit("cleanup");
+}
 
-app.get('/', function(request, response) {
-  response.send('Welcome.')
-})
+console.log("Node app is running at localhost:" + (process.env.PORT || 5000));
 
-app.get('/api*', function(req, res) {
-  //response.send('Welcome to api');
-  //modify the url in any way you want
-  var newurl = 'http://colourlovers.com' + req.url;
-  //console.log("requesting " + newurl);//ex: http://colourlovers.com/api/palettes/top
-  request(newurl).pipe(res);
-})
+http.createServer(function (req, res) {
+  
+  // Error handling:
+  var errorHandler = handleError.bind(res)
+  process.on("uncaughtException", errorHandler);
+  res.on("cleanup", function() { process.removeListener("uncaughtException", errorHandler); });
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+  // all requests with argument 'path': http://localhost:5000/?path=http://quotesonslides.com/images/Innovation.jpg
+  if(req.url.match(/path=(.*)/)) {
+    res.setHeader("access-control-allow-origin", "*"); 
+    request.get(req.url.match(/path=(.*)/)[1]).pipe(res);
+  }else{
+    res.statusCode = 404;
+
+    res.end("More info at https://github.com/cDima/cors");
+  }
+}).listen(process.env.PORT || 5000);

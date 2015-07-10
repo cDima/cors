@@ -1,12 +1,10 @@
-# ColourLovers.com API Proxy built on Node.JS and Deployed on heroku
+# CORS Proxy built for Node.JS, express, on heroku
 
-Unfortunatelly colourlovers does not provide secured https access to their api; 
-This proxy, if deployed on a https server, would forward any request to /api to http://colourlovers.com/api. It is deployed on a single dyno [heroku](https://colorlovers.herokuapp.com);
+Lots of sites don't set CORS headers on their websites which blocks javascript access to their images.
+This proxy just returns the same [heroku](https://colorlovers.herokuapp.com);
 
 For example: 
-https://colorlovers.herokuapp.com/api/palettes/top
-would forward responses from
-http://colorlovers.com/api/palettes/top
+http://freecors.herokuapp.com/?path=http://quotesonslides.com/images/Innovation.jpg
 
 ## Running Locally
 
@@ -20,6 +18,10 @@ $ npm start
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+Usage:
+
+http://localhost:5000/?path=http://quotesonslides.com/images/Innovation.jpg
 
 ## Deploying to Heroku
 
